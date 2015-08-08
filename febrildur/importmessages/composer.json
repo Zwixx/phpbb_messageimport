@@ -3,7 +3,7 @@
 	"type": "phpbb-extension",
 	"description": "Allows import of xml based forum data",
 	"homepage": "https://localhost",
-	"version": "1.0.3",
+	"version": "1.0.0",
 	"time": "2015-08-08",
 	"keywords": ["phpbb", "extension", "message"],
 	"license": "GPL-2.0",

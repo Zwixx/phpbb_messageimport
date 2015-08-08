@@ -18,7 +18,7 @@ class importmessages_info
 			'title'		=> 'IMPORT_MESSAGES',
 			'version'	=> '1.0.2',
 			'modes'		=> array(
-				'import'		=> array('title' => 'ACP_IMPORT_MESSAGES', 'auth' => 'acl_a_user', 'cat' => array('ACP_CAT_USERS')),
+			'import'	=> array('title' => 'ACP_IMPORT_MESSAGES', 'auth' => 'acl_a_user', 'cat' => array('ACP_CAT_USERS')),
 			),
 		);
 	}
