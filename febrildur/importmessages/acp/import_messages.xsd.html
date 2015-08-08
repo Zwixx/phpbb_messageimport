@@ -1,0 +1,69 @@
+<html xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:cfn="http://xsd2htmlgraph.sourceforge.net/custom-functions" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta http-equiv="X-UA-Compatible" content="IE=edge"></meta><title>Schema of import_messages.xsd</title><style type="text/css"><!--
+h1 {margin-bottom: 0.25em;}
+h1 + p {font-size:12px;	color: black; font-family:"Courier New", Courier, monospace; margin-bottom: .5em;}
+h2, h3, div.attribute {display:table-cell;width:100px; background-color:#FFFF99;font-weight:bold; font-family:Arial, Helvetica, sans-serif; white-space:nowrap; background-color:#FFFF99; border: 1px solid black; padding: 1px 3px 1px; margin: 0px;}
+h2 {font-size:18px; border-width:2px;}
+h3 {font-size:14px;}
+dt.optional {font-style:italic;}
+dt.optional div:after {content: " ?";}
+div.attribute {background-color:#DDFFFF;}
+dt {padding-top:3px;}
+body > table {margin-top: 2px;}
+dl, dt, dd, .union td {margin: 0; font-size:12px; font-family:Arial, Helvetica, sans-serif;}
+td.name {vertical-align:top; width: 150px;}
+p.annotation {font-family:Arial, Helvetica, sans-serif; font-size:9px; margin-top: 0; margin-bottom: 3px; color:#666666;min-width: 150px; text-align:justify;}
+td.attributes dl {border: 1px dotted #999999; padding: 2px; margin-bottom: 4px; background-color: #EEEEEE; max-width: 500px;}
+tr.fold td.attributes dl, table.fold tbody tr.complex td {display: none;}
+table {border-spacing: 0px;}
+table.list {border-spacing: 4px;}
+td {vertical-align:top;	padding:0; width: 100%; empty-cells: show;}
+td.button {width: 1px;}
+td.button  span, span.sequence, span.all, span.choice, div.button, .shortcut a { display: block; background-color: #FFFFFF; background-repeat:no-repeat; border: 1px solid black; background-image: url(data:image/gif;base64,R0lGODlhJgAHAIAAAAAAAP///yH5BAEAAAEALAAAAAAmAAcAAAIpjI+pywjdnpIG2EPZxSFXJ1liJ1IbNzkdCmXPq6YrNH+1nXjRBLOVVQAAOw==); }
+td.button  span, div.button {cursor: pointer; width: 7px; height: 7px; margin: 4px;}
+.tbc div {position: relative;}
+table.unfold > tbody > tr > td.tbc {background-image:url(data:image/gif;base64,R0lGODlhCAABAIAAAJmZAP///yH5BAAAAAAALAAAAAAIAAEAAAIDjANXADs=); background-repeat:repeat-y;}
+tr.complex > td {border:solid 1px #999900; padding-bottom: 4px; padding-right: 2px;}
+div.button {float:left; margin: 4px 0 0;}
+span.sequence, span.all, span.choice, .shortcut a {width: 9px;height: 9px;margin-left: 0;margin-top: 4px;margin-right: 4px;margin-bottom: 0;}
+span.sequence {background-position: -11px 0;}
+span.choice {background-position: -25px 0;}
+span.all {background-position: -18px 0;}
+.shortcut a {background-position: -31px 0;position: relative;left: -5px;bottom: -2px;}
+.shortcut {display: table-cell;vertical-align: bottom;}
+.cardinality {width: 1px;padding-top: 2px;font-size:11px;}
+.cardinality span {font-family:Arial, Helvetica, sans-serif;font-weight:bold;padding-right: 3px;white-space: nowrap;margin: 0;}
+.list {width: 1px;}
+.info {position: relative;left: 7px;font-size:12px; width:150px;}
+dfn, code, li, span.length {margin: 0;}
+dfn {font-style:normal;color: #0000FF;}
+dfn:before {content: ": ";}
+dfn:after {content: " ";}
+code {color:#006600;}
+code:before {content: "(/";}
+code:after {content: "/) ";}
+span.range {color:#006600;}
+span.range:after { content: " "; }
+span.length {color:#9933CC;}
+span.length:before {content: "{";}
+span.length:after {content: "} ";}
+ul {display: inline;padding: 0;color: #003399;}
+ul:before {content: "[";}
+li {display: inline;}
+li:after {content: " |";}
+table.unfold > tbody > tr > td.name > div.button, .unfold > td.button > span {background-position: -5px 0;}
+table.fold > tbody > tr > td.name > div.button, .fold > td.button > span {background-position: 1px 0;}
+p.copyrights {font-size: 11px;text-align: center;}
+					--></style><script type="text/javascript" language="javascript"><!--
+function FOLD (NODE)
+{
+	NODE.className = (NODE.className == "fold") ? "unfold" : "fold";
+}
+function FOLD_ATTRIBUTES(BUTTON)
+{
+	FOLD(BUTTON.parentNode.parentNode);
+}
+function FOLD_CONTENT(BUTTON)
+{
+	FOLD(BUTTON.parentNode.parentNode.parentNode.parentNode);
+}
+				--></script></head><body><h1>Schema of import_messages.xsd</h1><hr></hr><table class="unfold"><tbody><tr class="unfold"><td class="name tbc"><a id="forum-message-list" name="forum-message-list"></a><h2 title="top-level element">forum-message-list</h2><div class="button" onclick="FOLD_CONTENT(this)"></div><div class="info"><p class="annotation">Allows to fully describe messages to be imported in phpBB3</p></div></td><td class="button"><span onclick="FOLD_ATTRIBUTES(this)"></span></td><td class="attributes"><dl><dt class="optional"><div class="attribute" title="optional attribute">date-format</div></dt><dd><p class="annotation">Defines the format used to describe the message dates (forum-message-list/topic/message/@posted). If omitted or empty the date format must be an interger number of seconds since UNIX Epoch. Else the time/date format is described with a string using the following placeholders:%Y = 4-digit year, %m = 2-digit month, %d = day(1-31), %H = hour(0-23), %M = minute, %S = second</p></dd></dl></td></tr><tr class="complex"><td colspan="3"><table class="list"><tbody><tr><td class="list"><span class="sequence" title="sequence"></span></td><td><table class="unfold"><tbody><tr class="unfold"><td class="cardinality" rowspan="2"><span>1..n</span></td><td class="name tbc"><a id="forum-message-list--topic" name="forum-message-list--topic"></a><h3 title="element">topic</h3><div class="button" onclick="FOLD_CONTENT(this)"></div><div class="info"><p class="annotation">Each instance defines a topic and contains all its messages</p></div></td><td class="button"><span onclick="FOLD_ATTRIBUTES(this)"></span></td><td class="attributes"><dl><dt><div class="attribute" title="attribute">forum-name</div></dt><dd><dfn>xs:string</dfn><span class="length" title="length">1,60</span><p class="annotation">Define name of the topic parent forum</p></dd><dt class="optional"><div class="attribute" title="optional attribute">title</div></dt><dd><dfn>xs:string</dfn><span class="length" title="length">1,60</span><p class="annotation">Define the title or subject of the topic. If not defined the first message of the topic MUST have a title.</p></dd></dl></td></tr><tr class="complex"><td colspan="3"><table class="list"><tbody><tr><td class="list"><span class="sequence" title="sequence"></span></td><td><table class="unfold"><tbody><tr class="unfold"><td class="cardinality" rowspan="2"><span>1..n</span></td><td class="name"><a id="forum-message-list--topic--message" name="forum-message-list--topic--message"></a><h3 title="element">message</h3><div class="info"><dfn>xs:string</dfn><p class="annotation">Each instance defines a message. Its value is the message text</p></div></td><td class="button"><span onclick="FOLD_ATTRIBUTES(this)"></span></td><td class="attributes"><dl><dt class="optional"><div class="attribute" title="optional attribute">title</div></dt><dd><p class="annotation">Message topic or subject. If not defined, the topic title is used. For the first message of the topic specific constraints apply: it must not be longer than 60 characters; it is ignored if the forum title is defined; it is used as forum title.</p></dd><dt><div class="attribute" title="attribute">posted</div></dt><dd><dfn>xs:string</dfn><span class="length" title="length">1,n</span><p class="annotation">Date/time when the message has been posted. Format is defined by forum-message-list/@date-format.</p></dd><dt><div class="attribute" title="attribute">by</div></dt><dd><dfn>xs:string</dfn><span class="length" title="length">1,n</span><p class="annotation">Username of the message author.</p></dd><dt class="optional"><div class="attribute" title="optional attribute">ip</div></dt><dd><dfn>xs:string</dfn><code title="pattern">\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}</code><p class="annotation">IP address of the message author</p></dd><dt class="optional"><div class="attribute" title="optional attribute">bbcode</div></dt><dd><p class="annotation">Allow BBcode in the message</p></dd><dt class="optional"><div class="attribute" title="optional attribute">smiley</div></dt><dd><p class="annotation">Allow smilies in the message</p></dd><dt class="optional"><div class="attribute" title="optional attribute">magic-url</div></dt><dd><p class="annotation">Allow to transform URL in links in the message</p></dd><dt class="optional"><div class="attribute" title="optional attribute">signature</div></dt><dd><p class="annotation">Display author signature below the message</p></dd></dl></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></body><p class="copyrights">Presentation built by <a href="http://xsd2htmlgraph.sourceforge.net/">XSD2HTMLGraph</a> v0.1 © 2010 Philippe Chevrier</p></html>

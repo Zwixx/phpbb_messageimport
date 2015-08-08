@@ -1,0 +1,64 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<p>{L_ACP_IMPORT_EXPLAIN}</p>
+
+<h1>{L_TITLE}</h1>
+
+<p>{L_EXPLAIN}</p>
+
+
+<!-- IF S_DIAG -->
+	<!-- IF S_ERROR -->
+    <div class="errorbox">
+    	<h3>{L_WARNING}</h3>
+    <!-- ELSE -->
+    <div class="successbox">
+    	<h3>{L_SUCCESS}</h3>
+    <!-- ENDIF -->
+        <p>{DIAG}</p>
+    </div>
+<!-- ENDIF -->
+
+
+<form id="acp_import_msg" method="post" action="{U_ACTION}">
+
+<fieldset>
+	<legend>{L_TITLE}</legend>
+<dl>
+	<dt><label for="filename">{L_FILENAME}*:</label><br /><span>{L_FILENAME_EXPLAIN}</span></dt>
+	<dd><input name="filename" type="text" class="text medium" maxlength="255" id="filename" value="{FILENAME}"/></dd>
+</dl>
+<dl>
+	<dt><label for="topicrange">{L_TOPIC_RANGE}:</label><br /><span>{L_TOPIC_RANGE_EXPLAIN}</span></dt>
+	<dd><input name="topicrange" type="text" class="text medium" maxlength="100" id="topicrange" value="{TOPIC_RANGE}"/></dd>
+</dl>
+<dl>
+	<dt><label for="allowbbcode">{L_ALLOW_BBCODE}:</label><br /><span>{L_ALLOW_BBCODE_EXPLAIN}</span></dt>
+	<dd><input name="allowbbcode" type="checkbox" class="radio" id="allowbbcode" value="1" <!-- IF ALLOW_BBCODE -->checked="checked"<!-- ENDIF --> /></dd>
+</dl>
+<dl>
+	<dt><label for="allowsmilies">{L_ALLOW_SMILIES}:</label><br /><span>{L_ALLOW_SMILIES_EXPLAIN}</span></dt>
+	<dd><input name="allowsmilies" type="checkbox" class="radio" id="allowsmilies" value="1" <!-- IF ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> /></dd>
+</dl>
+<dl>
+	<dt><label for="allowmagicurl">{L_ALLOW_MAGIC_URL}:</label><br /><span>{L_ALLOW_MAGIC_URL_EXPLAIN}</span></dt>
+	<dd><input name="allowmagicurl" type="checkbox" class="radio" id="allowmagicurl" value="1" <!-- IF ALLOW_MAGIC_URL -->checked="checked"<!-- ENDIF --> /></dd>
+</dl>
+<dl>
+	<dt><label for="allowsig">{L_ALLOW_SIG}:</label><br /><span>{L_ALLOW_SIG_EXPLAIN}</span></dt>
+	<dd><input name="allowsig" type="checkbox" class="radio" id="allowsig" value="1" <!-- IF ALLOW_SIG -->checked="checked"<!-- ENDIF --> /></dd>
+</dl>
+</fieldset>
+
+<p class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="submit" id="preview" name="preview" value="{L_PREVIEW}" />
+</p>
+{S_FORM_TOKEN}
+
+</form>
+
+
+<!-- INCLUDE overall_footer.html -->

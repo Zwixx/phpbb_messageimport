@@ -1,0 +1,27 @@
+{
+	"name": "febrildur/importmessages",
+	"type": "phpbb-extension",
+	"description": "Allows import of xml based forum data",
+	"homepage": "https://localhost",
+	"version": "1.0.3",
+	"time": "2015-08-08",
+	"keywords": ["phpbb", "extension", "message"],
+	"license": "GPL-2.0",
+	"authors": [
+        {
+            "name": "Christian Froehlich",
+            "homepage": "http://localhost",
+            "email": "zwiix@googlemail.com",
+            "role": "Developer"
+        }
+	],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"extra": {
+		"display-name": "Import XML Messages",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.0,<3.2.*@dev"
+		}
+	}
+}

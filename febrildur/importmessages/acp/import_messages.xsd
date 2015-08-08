@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="forum-message-list">
+		<xs:annotation>
+			<xs:documentation>Allows to fully describe messages to be imported in phpBB3</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="topic" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Each instance defines a topic and contains all its messages</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="message" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Each instance defines a message. Its value is the message text</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="title">
+												<xs:annotation>
+													<xs:documentation>Message topic or subject. If not defined, the topic title is used. For the first message of the topic specific constraints apply: it must not be longer than 60 characters; it is ignored if the forum title is defined; it is used as forum title.</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+											<xs:attribute name="posted" use="required">
+												<xs:annotation>
+													<xs:documentation>Date/time when the message has been posted. Format is defined by forum-message-list/@date-format.</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:minLength value="1"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+											<xs:attribute name="by" use="required">
+												<xs:annotation>
+													<xs:documentation>Username of the message author.</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:minLength value="1"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+											<xs:attribute name="ip">
+												<xs:annotation>
+													<xs:documentation>IP address of the message author</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:pattern value="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+											<xs:attribute name="bbcode">
+												<xs:annotation>
+													<xs:documentation>Allow BBcode in the message</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+											<xs:attribute name="smiley">
+												<xs:annotation>
+													<xs:documentation>Allow smilies in the message</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+											<xs:attribute name="magic-url">
+												<xs:annotation>
+													<xs:documentation>Allow to transform URL in links in the message</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+											<xs:attribute name="signature">
+												<xs:annotation>
+													<xs:documentation>Display author signature below the message</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="forum-name" use="required">
+							<xs:annotation>
+								<xs:documentation>Define name of the topic parent forum</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="60"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="title">
+							<xs:annotation>
+								<xs:documentation>Define the title or subject of the topic. If not defined the first message of the topic MUST have a title.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="60"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="date-format">
+				<xs:annotation>
+					<xs:documentation>Defines the format used to describe the message dates (forum-message-list/topic/message/@posted). If omitted or empty the date format must be an interger number of seconds since UNIX Epoch. Else the time/date format is described with a string using the following placeholders:%Y = 4-digit year, %m = 2-digit month, %d = day(1-31), %H = hour(0-23), %M = minute, %S = second</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
