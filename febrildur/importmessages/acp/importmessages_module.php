@@ -34,8 +34,7 @@ class importmessages_module
 		include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 		include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
 		
-		// $user->add_lang('mods/acp_importmessages');
-
+		$user->add_lang_ext('febrildur/importmessages', 'acp_importmessages');
 
 		$this->tpl_name = 'acp_importmessages';
 		$this->page_title = 'ACP_IMPORT_MESSAGES';
@@ -211,6 +210,7 @@ class importmessages_module
 			break;
 		}
 		
+		$diag = "";
 		//-- Build the operation statistics
 		if ($submit | $preview)
 		{
