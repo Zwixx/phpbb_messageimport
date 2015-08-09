@@ -718,7 +718,7 @@ class importmessages_module
 		$db->sql_transaction('commit');
 	}
 }
-/*
+
 class clock_monitor
 {
 	var $start_time;
@@ -767,5 +767,3 @@ class clock_monitor
 		return $this->timeleft;
 	}
 }
-
- */

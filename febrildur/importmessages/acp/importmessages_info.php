@@ -16,9 +16,11 @@ class importmessages_info
 		return array(
 			'filename'	=> 'febrildur\importmessages\acp\importmessages_module',
 			'title'		=> 'IMPORT_MESSAGES',
-			'version'	=> '1.0.2',
+			'version'	=> '1.0.0',
 			'modes'		=> array(
-			'import'	=> array('title' => 'ACP_IMPORT_MESSAGES', 'auth' => 'acl_a_user', 'cat' => array('ACP_CAT_USERS')),
+				'import'	=> array('title' => 'ACP_IMPORT_MESSAGES', 
+						'auth' => 'acl_a_user', 
+						'cat' => array('ACP_CAT_USERS')),
 			),
 		);
 	}

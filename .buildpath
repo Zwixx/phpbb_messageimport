@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="febrildur/importmessages/acp"/>
+	<buildpathentry kind="src" path="febrildur/importmessages/language/en"/>
+	<buildpathentry kind="src" path="febrildur/importmessages/migrations/v100"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
