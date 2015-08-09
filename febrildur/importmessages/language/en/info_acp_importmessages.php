@@ -37,6 +37,7 @@ if (empty($lang) || !is_array($lang))
 
 // Email settings
 $lang = array_merge($lang, array(
+	'ACP_MESSAGEIMPORT'					=> 'Import Messages',
 	'ACP_IMPORT_MESSAGES'				=> 'Import Messages',
 	'IMPORT_MESSAGES'					=> 'Import Messages',
 	'INSTALL_IMPORT_MESSAGES'			=> 'Install Import Messages',

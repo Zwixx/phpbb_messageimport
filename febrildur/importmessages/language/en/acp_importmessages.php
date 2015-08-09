@@ -36,6 +36,7 @@ if (empty($lang) || !is_array($lang))
 
 // Database Backup/Restore
 $lang = array_merge($lang, array(
+	'ACP_IMPORTMESSAGES'		=> 'Import Messages',
 	'TITLE'		 				=> 'Message Import',
 	'EXPLAIN'					=> 'Import messages from XML files. Files to be imported have to be in the \'store\' directory. '
 									. 'When importing the necessary topics are created, but the forums are not. ' 
