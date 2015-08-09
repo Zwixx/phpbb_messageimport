@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
 	<buildpathentry kind="src" path="febrildur/importmessages/acp"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/phpBB3"/>
 	<buildpathentry kind="src" path="febrildur/importmessages/language/en"/>
-	<buildpathentry kind="src" path="febrildur/importmessages/migrations/v100"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry kind="src" path="febrildur/importmessages/migrations/v100"/>
 </buildpath>

@@ -2,6 +2,56 @@
 
 namespace febrildur\importmessages\acp;
 
+class clock_monitor
+{
+	var $start_time;
+	var $max_time;
+	var $cur_time;
+	var $count;
+	var $timeleft;
+	
+	function __construct($duration)
+	{
+		$this->start_time = time();
+		$this->max_time = (is_object($duration))
+						? $duration->get_max_time()
+						: $this->start_time + $duration -2;
+		
+		$count = 0;
+	}
+	
+	function time_for_one_more ()
+	{
+		++$this->count;
+		$this->cur_time = time();
+		$this->timeleft = ($this->cur_time + ($this->cur_time-$this->start_time)/$this->count < $this->max_time);
+		return $this->timeleft;
+	}
+	
+	function get_max_time ()
+	{
+		return $this->max_time;
+	}
+	
+	function get_count ()
+	{
+		return $this->count;
+	}
+	function get_duration()
+	{
+		return $this->cur_time - $this->start_time;
+	}
+	
+	function is_started ()
+	{
+		return ($this->count > 0);
+	}
+	function is_completed ()
+	{
+		return $this->timeleft;
+	}
+}
+
 class importmessages_module
 {
 	var $dateformat;
@@ -30,7 +80,6 @@ class importmessages_module
 		global $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
 		
-		// include($phpbb_root_path . 'includes/functions_profile_fields.' . $phpEx);
 		include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 		include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
 		
@@ -98,7 +147,7 @@ class importmessages_module
 			//-- Compute the topic range
 			$first_topic = 1;
 			$last_topic = sizeof($this->topic_list);
-			if ($matches[2] != '')
+			if (sizeof($matches) > 1)
 			{
 				$first_topic = (int)$matches[2];
 				if ($matches[3] == '')
@@ -123,7 +172,6 @@ class importmessages_module
 			}
 			$end_parsing_time = time();
 
-			//-- Start of parsing
 			$parse_timing = new clock_monitor ($load_timing);
 
 			//-- Analyze the XML data
@@ -241,7 +289,7 @@ class importmessages_module
 			if ($this->errors)
 				$diag = implode('<br />', $this->errors) . '<br />' . $diag;
 		}
-		
+
 		//-- Fill the form
 		$template->assign_vars(array(
 				'FILENAME'		 => $filename,
@@ -425,7 +473,7 @@ class importmessages_module
 			$msg_data['signature'] = $this->allow_sig;
 		}
 		
-		$message_parser = new parse_message();
+		$message_parser = new \parse_message();
 		$message_parser->message = utf8_normalize_nfc((string)$msg_data[0]);
 		$message_parser->parse(
 							$msg_data['bbcode'], 
@@ -716,54 +764,5 @@ class importmessages_module
 		sync('forum', 'forum_id', Array($forum_id), true, true);
 
 		$db->sql_transaction('commit');
-	}
-}
-
-class clock_monitor
-{
-	var $start_time;
-	var $max_time;
-	var $cur_time;
-	var $count;
-	var $timeleft;
-	
-	function clock_monitor ($duration)
-	{
-		$this->start_time = time();
-		$this->max_time = (is_object($duration))
-						? $duration->get_max_time()
-						: $this->start_time + $duration -2;
-		$count = 0;
-	}
-	
-	function time_for_one_more ()
-	{
-		++$this->count;
-		$this->cur_time = time();
-		$this->timeleft = ($this->cur_time + ($this->cur_time-$this->start_time)/$this->count < $this->max_time);
-		return $this->timeleft;
-	}
-	
-	function get_max_time ()
-	{
-		return $this->max_time;
-	}
-	
-	function get_count ()
-	{
-		return $this->count;
-	}
-	function get_duration()
-	{
-		return $this->cur_time - $this->start_time;
-	}
-	
-	function is_started ()
-	{
-		return ($this->count > 0);
-	}
-	function is_completed ()
-	{
-		return $this->timeleft;
 	}
 }
