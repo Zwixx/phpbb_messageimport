@@ -473,25 +473,26 @@ class importmessages_module
 			$msg_data['signature'] = $this->allow_sig;
 		}
 		
-		$message_parser = new \parse_message();
-		$message_parser->message = utf8_normalize_nfc((string)$msg_data[0]);
-		$message_parser->parse(
-							$msg_data['bbcode'], 
-							$msg_data['magic-url'], 
-							$msg_data['smiley'], 
-							false,            // img_status, 
-							false,            // flash_status, 
-							true,             // quote_status, 
-							$msg_data['magic-url']
-						);
-		if (sizeof($message_parser->warn_msg) > 0)
+		$message_text = utf8_normalize_nfc((string)$msg_data[0]);
+		$config['max_quote_depth'] = 100;
+		$errors = generate_text_for_storage(
+				$message_text,
+				$message_uid,
+				$message_bitfield,
+				$message_options,
+				$msg_data['bbcode'],
+				$msg_data['magic-url'],
+				$msg_data['smiley']);
+		
+		if(sizeof($errors) > 0)
 		{
-			$this->error[] = implode('<br />', $message_parser->warn_msg);
-			$message_parser->warn_msg = array();
+ 			$this->error[] = implode('<br />', $errors);
+ 			$message_parser->warn_msg = array();
 		}
-		$msg_data['bbcode_bitfield'] = $message_parser->bbcode_bitfield;
-		$msg_data['bbcode_uid'] = $message_parser->bbcode_uid;
-		$msg_data[0] = $message_parser->message;
+		
+		$msg_data['bbcode_bitfield'] = $message_bitfield;
+		$msg_data['bbcode_uid'] = $message_uid;
+		$msg_data[0] = $message_text;
 	}
 	
 	//-- Raise a date error except if too many errors have been reported
@@ -560,14 +561,10 @@ class importmessages_module
 			'topic_last_view_time'		=> $forum_time,
 			'topic_last_post_time'      => $forum_time,
 			'forum_id'					=> $forum_id,
-//			'icon_id'					=> 0,
-//			'topic_approved'			=> 1,
 			'topic_title'				=> (string)$topic_elm['title'],
 			'topic_first_poster_name'	=> $poster_name,
 			'topic_first_poster_colour'	=> $poster_data['colour'],
 			'topic_type'				=> POST_NORMAL,
-//			'topic_time_limit'			=> 0,
-//			'topic_attachment'			=> 0,
 			'topic_visibility'			=> 1
 		);
 
@@ -577,6 +574,20 @@ class importmessages_module
 		$topic_id = $db->sql_nextid();
 		unset($sql_data);
 
+
+		if (isset($topic_elm['oldtopicno'])) {
+			// Create the topic old number
+			$sql_data = array(
+					'oldpostid'	=> (int)$topic_elm['oldtopicno'],
+					'newpostid'	=> $topic_id,
+			);
+			
+			$sql = 'INSERT INTO phpbb_posts_convert ' .
+					$db->sql_build_array('INSERT', $sql_data);
+			$db->sql_query($sql);
+			unset($sql_data);
+		}
+		
 		// Add the topic posts
 		foreach ($topic_elm as $msg_index => $msg_data)
 		{
@@ -701,13 +712,12 @@ class importmessages_module
 			'topic_first_post_id'		=> $first_msg_id,
 			'topic_last_post_id'		=> $msg_id,
 			'topic_last_post_time'		=> $msg_date,
-			'topic_last_view_time'      => $msg_date,
+			'topic_last_view_time'		=> $msg_date,
 			'topic_last_poster_id'		=> $poster_data['user_id'],
 			'topic_last_poster_name'	=> $poster_name,
 			'topic_last_poster_colour'	=> (string)$poster_data['colour'],
 			'topic_last_post_subject'	=> (string)$msg_data['title'],
-			'topic_posts_approved'             => $post_count,
-			// 'topic_replies_real'        => $post_count,
+			'topic_posts_approved'		=> $post_count,
 			);
 		$sql = 'UPDATE ' . TOPICS_TABLE . '
 			SET ' . $db->sql_build_array('UPDATE', $sql_data) . '
@@ -737,25 +747,6 @@ class importmessages_module
 				$sql_data = array();
 			}
 		}
-		
-		// Update forum stat
-		// $sql_data[] = 'forum_posts = forum_posts + ' . $post_count;
-		// $sql_data[] = 'forum_topics_real = forum_topics_real + 1';
-		// $sql_data[] = 'forum_topics = forum_topics + 1';
-		if ($forum_data['forum_last_post_time'] < $msg_date)
-		{
-			$forum_data['forum_last_post_time'] = $msg_date;
-			$sql_data[] = 'forum_last_post_id = ' . $msg_id;
-			$sql_data[] = "forum_last_post_subject = '" . $db->sql_escape($msg_data['title']) . "'";
-			$sql_data[] = 'forum_last_post_time = ' . $msg_date;
-			$sql_data[] = 'forum_last_poster_id = ' . $poster_data['user_id'];
-			$sql_data[] = "forum_last_poster_name = '" . $db->sql_escape($poster_name) . "'";
-			$sql_data[] = "forum_last_poster_colour = '" . $db->sql_escape($poster_data['colour']) . "'";
-		}
-		$sql = 'UPDATE ' . FORUMS_TABLE . 
-						' SET ' . implode(', ', $sql_data) . 
-						' WHERE forum_id = ' . $forum_id;
-		// $db->sql_query($sql);
 		
 		// Update global topic and post count
 		set_config_count('num_topics', 1, true);

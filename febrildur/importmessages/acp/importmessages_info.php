@@ -18,8 +18,8 @@ class importmessages_info
 			'title'		=> 'IMPORT_MESSAGES',
 			'version'	=> '1.0.0',
 			'modes'		=> array(
-				'import'	=> array('title' => 'ACP_IMPORT_MESSAGES', 
-						'auth' => 'acl_a_user', 
+				'main'	=> array('title' => 'ACP_IMPORT_MESSAGES', 
+						'auth' => 'ext_febrildur/importmessages && acl_a_user', 
 						'cat' => array('ACP_CAT_USERS')),
 			),
 		);

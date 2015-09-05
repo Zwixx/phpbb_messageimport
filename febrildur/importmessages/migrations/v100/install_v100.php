@@ -13,26 +13,13 @@ class install_v100 extends \phpbb\db\migration\migration
 	{
 		return array(
 			array('config.add', array('messageimport_version', '1.0.0')),
+			array('module.add', array('acp', 'ACP_MESSAGES','ACP_MESSAGEIMPORT')),
 			array('module.add', array(
 				'acp',
 				'ACP_MESSAGEIMPORT',
 				array(
 					'module_basename'	=> '\febrildur\importmessages\acp\importmessages_module',
 					'modes'				=> array('main'),
-				),
-			)),
-		);
-	}
-	
-	public function revert_data()
-	{
-		return array(
-			array('config.remove', array('messageimport_version')),
-			array('module.remove', array(
-				'acp',
-				'ACP_MESSAGEIMPORT',
-				array(
-					'module_basename'	=> '\febrildur\importmessages\acp\importmessages_module',
 				),
 			)),
 		);
