@@ -545,7 +545,7 @@ class importmessages_module
 		$forum_time  = $topic_elm->message[0]['date'];
 		$poster_name = (string)$topic_elm->message[0]['by'];
 		$poster_data = &$this->poster_ary[$poster_name];
-		if (($poster_data === false) || !is_numeric($poster_data['user_id']))
+		if (($poster_data === false) || !is_numeric(isset($poster_data['user_id']) ? $poster_data['user_id'] : ""))
 		{
 			$poster_data = array('user_id'  => ANONYMOUS,
 					 'username' => '',
@@ -594,7 +594,7 @@ class importmessages_module
 			$msg_date    = $msg_data['date'];
 			$poster_name = (string)$msg_data['by'];
 			$poster_data = &$this->poster_ary[$poster_name];
-			if (($poster_data === false) || !is_numeric($poster_data['user_id']))
+			if (($poster_data === false) || !is_numeric(isset($poster_data['user_id']) ? $poster_data['user_id'] : ""))
 			{
 				$poster_data = array('user_id'  => ANONYMOUS,
 						 'username' => '',
