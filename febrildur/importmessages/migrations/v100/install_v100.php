@@ -13,10 +13,9 @@ class install_v100 extends \phpbb\db\migration\migration
 	{
 		return array(
 			array('config.add', array('messageimport_version', '1.0.0')),
-			array('module.add', array('acp', 'ACP_MESSAGES','ACP_MESSAGEIMPORT')),
 			array('module.add', array(
 				'acp',
-				'ACP_MESSAGEIMPORT',
+				'ACP_CAT_DATABASE',
 				array(
 					'module_basename'	=> '\febrildur\importmessages\acp\importmessages_module',
 					'modes'				=> array('main'),
