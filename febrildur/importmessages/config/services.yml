@@ -1,0 +1,20 @@
+imports:
+-  resource: tables.yml
+services:
+   febrildur.redirecttoid.controller:
+      class: febrildur\importmessages\controller\main
+      arguments:
+      - '%core.root_path%'
+      - '%core.php_ext%'
+      - '@service_container'
+      - '@ext.manager'
+      - '@path_helper'
+      - '@dbal.conn'
+      - '@config'
+      - '@log'
+      - '@controller.helper'
+      - '@auth'
+      - '@request'
+      - '@template'
+      - '@user'
+      - '@language'

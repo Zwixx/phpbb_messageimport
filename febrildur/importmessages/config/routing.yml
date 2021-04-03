@@ -1,0 +1,3 @@
+febrildur_redirecttoid_controller:
+    path: /redirecttoid/{id}
+    defaults: { _controller: febrildur.redirecttoid.controller:handle, id: "0" }

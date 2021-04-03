@@ -1,0 +1,2 @@
+parameters:
+   tables.messageimport.postsconvert: '%core.table_prefix%posts_convert'
