@@ -85,27 +85,26 @@ class main {
 	/**
 	 * redirecttoid controller for route /f1webtip/{name}
 	 *
-	 * @param string $name
+	 * @param string $id
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
 	public function handle($id) {
-		if (is_int ( $id )) {
-			$sql = "SELECT max(newpostid) newpostid
-    			FROM phpbb_posts_convert
-    			WHERE oldpostid = $id";
-			echo $sql;
-			$result = $db->sql_query_limit ( $sql, 1 );
+		$id = intval($id);
+		$sql = "SELECT max(newpostid) newpostid
+   			FROM phpbb_posts_convert
+   			WHERE oldpostid = $id";
+		
+		$result = $this->db->sql_query_limit ( $sql, 1 );
 
-			while ( $row = $db->sql_fetchrow ( $result ) ) {
-				$redirect = append_sid ( "{$this->root_path}viewtopic.$phpEx", 't=' . $row ["newpostid"] );
-				redirect ( $redirect );
-			}
-
-			$db->sql_freeresult ( $result );
-
-			return "Topic-ID wurde nicht gefunden";
-		} else {
-			return "Topic-ID wurde nicht gefunden";
+		$row = $this->db->sql_fetchrow ( $result );
+		if (!is_null($row["newpostid"])) {
+			$redirect = append_sid ( "{$this->root_path}viewtopic." . $this->php_ext, 't=' . $row ["newpostid"] );
+			echo $redirect;
+			redirect ( $redirect );
+			return "Topic-ID wurde gefunden. ($redirect)";
 		}
+
+		$this->db->sql_freeresult ( $result );
+		return "Topic-ID wurde nicht gefunden ($id).";
 	}
 }
