@@ -582,6 +582,9 @@ class importmessages_module
 					'newpostid'	=> $topic_id,
 			);
 			
+			$sqlDelete = 'DELETE from phpbb_posts_convert where oldpostid = '.$sql_data['oldpostid'];
+			$db->sql_query($sqlDelete);
+			
 			$sql = 'INSERT INTO phpbb_posts_convert ' .
 					$db->sql_build_array('INSERT', $sql_data);
 			$db->sql_query($sql);

@@ -9,6 +9,20 @@ class install_v100 extends \phpbb\db\migration\migration
 		return isset($this->config['messageimport_version']);
 	}
 
+	public function update_schema()
+	{
+		return [
+				'add_tables'		=> [
+						$this->table_prefix . 'posts_convert'	=> [
+								'COLUMNS'		=>	[
+										'oldpostid'		=> ['UINT', null, ''],
+										'newpostid'		=> ['UINT', null, ''],
+								],
+								'PRIMARY_KEY'	=> 'oldpostid',
+						],
+				],
+		];
+	}
 	public function update_data()
 	{
 		return array(
